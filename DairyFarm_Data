@@ -1,0 +1,51 @@
+Insert into COW (CowID,CowName, CowWeight,UdderPOS,MilkID,FeedID,HealthID,LocalID)
+    Values(000000001,'BETSY',1600, 0002,00001, 101, 1, 0)
+;
+Insert into COW (CowID,CowName, CowWeight,UdderPOS,MilkID,FeedID,HealthID,LocalID)
+    Values(000000002,'COWLIGAN',1600, 0102,00002, 102, 2, 0)
+;
+
+
+Insert into Jobs(JobID,EmpID,LocalID,CowID)
+    Values(10001,90000001,0,0)
+;
+
+
+Insert into Employee(EmpID,EmpName,EmpLastName,JobID)
+    Values(900000001, 'Fred', 'Murkyry',00000)
+;
+
+
+Insert into Milk(MilkID,MilkQty,StorageDate,MilkHealth)
+    Values(00001, 1, '05/06/2022','Good')
+;
+Insert into Milk(MilkID,MilkQty,StorageDate,MilkHealth)
+    Values(00002, 0, '00/00/0000','n/a')
+;
+
+
+Insert into Feed(FeedID,Diet,FeedDate,FeedMedicine)
+    Values(101, 'Regular','05/06/2022','none')
+;
+
+
+Insert into Medicine (MedicineID)
+    Values(99001)
+;
+
+
+Insert into CowHealth (HealthID,CowStatus,Condition, CowMedicine)
+    Values(101,'NORMAL', 'CLEAN', 'None')
+;
+Insert into CowHealth (HealthID,CowStatus,Condition, CowMedicine)
+    Values(102,'DEWORMING', 'WORM', 'ivermectin')
+;
+
+
+Insert into Orders(OrdersID,MilkID,Order_Date, Due_Date,Payment)
+    Values(10000001,00001,'05/06/2022','06/01/2022',500)
+;
+
+Insert into Locations(LocalID,LocalName,LocalAddress1,LocalAddress2,LocalAddress3,LocalAddress4,localAddress5,Capacity,MachineID,CowID)
+    Values(0, 'Barn A', '100','Cornplanter Way','Hamlin','PA', '16005',100, 10000001,0)
+;
