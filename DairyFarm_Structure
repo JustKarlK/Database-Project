@@ -1,0 +1,117 @@
+CREATE Table Cow (
+	CowID int DEFAULT 0 NOT NULL,
+	CowName varchar(255) NOT NULL,
+	CowWeight int NOT NULL,
+	UdderPOS int NOT NULL,
+	MilkID int NOT NULL,
+	FeedID int NOT NULL,
+	HealthID int NOT NULL,
+	LocalID int	NOT NULL
+);
+CREATE table Jobs (
+    JobID int DEFAULT 0 NOT NULL,
+	EmpID int DEFAULT 0 NULL,
+	LocalID int DEFAULT 0 NULL,
+	CowID int DEFAULT 0 NULL
+);
+CREATE table Employee (
+	EmpID int DEFAULT 0 NOT NULL,
+	EmpName varchar (15) NOT NULL,
+	EmpLastName varchar (25) NOT NULL,
+	JobID int DEFAULT 0 NULL
+);
+CREATE table Locations (
+	LocalID int DEFAULT 0 NOT NULL,
+	LocalName varchar (255) NOT NULL,
+	LocalAddress1 varchar (10) NULL,
+	LocalAddress2 varchar (50) NULL,
+	LocalAddress3 varchar (25) NULL,
+	LocalAddress4 varchar (2) NULL,
+	LocalAddress5 varchar (5) NULL,
+	Capacity int DEFAULT 0 NULL,
+	MachineID int DEFAULT 0 NULL,
+	CowID int DEFAULT 0 NULL
+);
+CREATE table Milk (
+	MilkID int DEFAULT 0 NOT NULL,
+	MilkQty int DEFAULT 0 NULL,
+	StorageDate varchar (10) NOT NULL,
+	MilkHealth varchar (255) NULL
+);
+CREATE table Feed (
+	FeedID int DEFAULT 0 NOT NULL,
+	Diet varchar (100) NOT NULL,
+	FeedDate varchar (10) NULL,
+	FeedMedicine varchar (50) NULL
+);
+CREATE table CowHealth (
+	HealthID int DEFAULT 0 NOT NULL,
+	CowStatus varchar (100) NULL,
+	Condition varchar (50) NULL,
+	CowMedicine varchar (100) NULL
+);
+CREATE table Orders (
+	OrdersID int DEFAULT 0 NOT NULL,
+	MilkID int DEFAULT 0 NOT NULL,
+	Order_Date varchar (10) NULL,
+	Due_Date varchar (10) NULL,
+	Payment int DEFAULT 0 NULL
+);
+CREATE table FailRefusal (
+	FR_ID int DEFAULT 0 NOT NULL,
+	CowID int DEFAULT 0 NOT NULL,
+	RF_Date varchar (10) NULL,
+);
+
+CREATE table Medicine (
+    MedicineID int DEFAULT 0 NOT NULL
+);
+
+ALTER Table Cow 
+    ADD CONSTRAINT Cow_PK PRIMARY KEY (CowID)
+    ADD CONSTRAINT Cow_FK0 FOREIGN KEY (MilkID) REFERENCES Milk (MIlkID)
+    ADD CONSTRAINT Cow_FK1 FOREIGN KEY (FeedID) REFERENCES Feed (FeedID)
+    ADD CONSTRAINT Cow_FK2 FOREIGN KEY (LocalID) REFERENCES Locations (LocalID)
+;
+    
+
+ALTER Table Jobs
+    Add Constraint Jobs_PK PRIMARY KEY (JobID)
+    Add Constraint Jobs_FK0 Foreign Key (EmpID) References Employee (EmpID)
+    Add Constraint Jobs_FK1 Foreign Key (LocalID) References Locations (LocalID)
+    Add Constraint Jobs_FK2 Foreign Key (CowID) References Cow (CowID)
+;
+Alter Table Employee
+    Add Constraint Emp_PK Primary Key (EmpID)
+ ;   
+
+Alter Table Locations
+    Add Constraint LocalID_PK Primary Key (LocalID)
+;    
+
+Alter Table Milk
+    Add Constraint Milk_PK Primary Key (MilkID)
+ ;   
+
+Alter Table Feed
+    Add Constraint Feed_PK Primary Key (FeedID)
+ ;   
+
+Alter Table CowHealth
+    Add Constraint CowHealth_PK Primary Key (HealthID)
+    Add Constraint CowHealth_FK Foreign Key (Medicine) References Medicine (MedicineID)
+ ;   
+
+Alter Table Medicine
+    Add Constraint Medicine_PK Primary Key (MedicineID)
+ ;   
+
+Alter Table Orders
+    Add Constraint Orders_PK Primary Key (OrderID)
+    Add Constraint Orders_FK Foreign key (MilkID) References Milk (MilkID)
+ ;   
+
+Alter Table FailRefusal
+    Add Constraint FR_PK Primary Key (FR_ID)
+
+;
